@@ -16,3 +16,6 @@ class Util:
 	def resolveWriter():
 		writers = {	"FileSystemWriter" : FileSystemWriter()	}
 		return writers[writerString]
+
+	def getSiteConfig(site):
+		siteConfig = config.get("scrapers.site-config.sites").get(site)
