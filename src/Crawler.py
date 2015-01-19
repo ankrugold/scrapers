@@ -1,9 +1,20 @@
 __author__='agni'
 
-from pyhocon import ConfigFactory
+import requests
 
 class Crawler:
-	config = ConfigFactory.load()
-	queue = config.getString("scrapers.queue")
+	#Default implementation. Is overloaded by supplying a queue.
+	queue = Util.resolveQueue()
 
-	
+	def __init__(self, queueStr):
+		self.queue = Util.resolveQueue(queueStr)
+
+	def fetch():
+		return fetch(queue.pop())
+
+	def fetch(url):
+		return requests.get(url)
+
+	def write(writer, data):
+		writer.write(data)
+
