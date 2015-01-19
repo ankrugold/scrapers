@@ -6,7 +6,7 @@ class InMemoryQueue:
 	def get():
 		return queue.get()
 
-	def put(data):
-		for i in data:
+	def put(list):
+		for i in list:
 			queue.put(i)
 
