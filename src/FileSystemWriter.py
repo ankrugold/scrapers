@@ -2,14 +2,16 @@ import re
 from urlparse import urlparse
 
 class FileSystemWriter:
-	writerHead = Util.writerHead
 
-	def write(url, data):
+	def __init__(self, writerHead):
+		self.writerHead = writerHead
+
+	def write(self, url, data):
 		parsedUrl = urlparse(url)
-		file = open(writerHead + parsedUrl.netloc + cleanWithDashes(parsedUrl.path + parsedUrl.query), "w")
+		file = open(self.writerHead + parsedUrl.netloc + cleanWithDashes(parsedUrl.path + parsedUrl.query), "w")
 		file.write(data)
 		file.close()
 
-	def cleanWithDashes(str):
+	def cleanWithDashes(self, str):
 		re.sub("[=&/]", "--", str)
 

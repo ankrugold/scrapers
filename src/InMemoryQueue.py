@@ -2,11 +2,9 @@ from Queue import Queue
 
 class InMemoryQueue:
 	queue = Queue()
-	
-	def get():
-		return queue.get()
-
-	def put(list):
+	def pop(self):
+		return self.queue.get()
+	def put(self, list):
 		for i in list:
-			queue.put(i)
+			self.queue.put(i)
 
