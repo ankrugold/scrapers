@@ -6,7 +6,7 @@ class Util:
 	config = ConfigFactory.parse_file("../conf/application.conf")
 	queueString = config.get_string("scrapers.queue")
 	writerString = config.get_string("scrapers.writer")
-	writerHead = config.get_string("scrapers.writer-head")
+	writerHead = config.get_string("scrapers.writer_head")
 	def resolveQueue(self, queueStr = queueString):
 		queues = { "InMemoryQueue" : InMemoryQueue() }
 		return queues[queueStr]
@@ -14,4 +14,5 @@ class Util:
 		writers = {	"FileSystemWriter" : FileSystemWriter(self.writerHead)	}
 		return writers[self.writerString]
 	def getSiteConfig(self, site):
-		siteConfig = self.config.get("scrapers.site-config.sites").get(site)
+		return self.config.get("scrapers.site_config.sites." + site)
+

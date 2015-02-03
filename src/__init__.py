@@ -1,17 +1,21 @@
+#!/usr/bin/python
 __author__ = 'agni'
 
 import sys
-from Crawler import Crawler
 from Seeder import Seeder
-from Parser import Parser
+from Crawler import Crawler
+import logging
 
 def main(argv):
+	logging.info("Looking in components for " + argv[0])
 	components = {
-		"crawler" : Crawler().keepFetching(),
-		"seeder"  : Seeder(Crawler(), sys.argv[1]).seed(),
-		"parser"  : Parser()
+		"seeder"  : Seeder(Crawler(), sys.argv[2]).seed()
 	}	
-	components[argv[0]]()
+	if len(argv > 1):
+		components[argv[1]]()
+	else:
+		print "Not enough arguments. Exiting..."
+		sys.exit(1)
 
 
 if __name__ == "__main__": 
