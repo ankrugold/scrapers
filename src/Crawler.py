@@ -18,7 +18,7 @@ class Crawler:
 		logging.info('Fetching url: ' + url)
 		config = self.util.getSiteConfig(urlparse(url).netloc)
 		sleep(config.get("crawl_delay"))
-		return requests.get(url)
+		return requests.get(url).text
 	def write(self, data):
 		self.writer.write(self.url, data)
 	def fetchAndWrite(self):

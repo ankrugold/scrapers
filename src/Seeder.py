@@ -24,14 +24,14 @@ class Seeder:
 			self.crawler.queue.put(self.seedOnePage(initialSelects))
 	#Infinitely recursive. But should stop/wait once the queue finishes. Same holds for Crawler's keepFetching method.
 	def seed(self):
-		self.crawler.queue.put(seedOnePage(self.siteConfig.get("final_selects")))
+		self.crawler.queue.put(self.seedOnePage(self.siteConfig.get("seeder.final_selects")))
 		self.seed()
 	def seedOnePage(self, selects):
 		page = self.crawler.fetchAndWrite()
 		seeds = []
 		for select in selects:
 			soup = BeautifulSoup(page)
-			seeds.extend(seedsFromSelects(soup, select))
+			seeds.extend(self.seedsFromSelects(soup, select))
 		return seeds
 	def seedsFromSelects(self, soup, select):
 		seeds = []
@@ -39,6 +39,6 @@ class Seeder:
 			ref = urlparse(s.get("href"))
 			seedUrl = ref
 			if not ref.netloc:
-				seedUrl = "http://" + self.site + "/" + ref
+				seedUrl = "http://" + self.site + "/" + ref.path
 			seeds.append(seedUrl)
 		return seeds
