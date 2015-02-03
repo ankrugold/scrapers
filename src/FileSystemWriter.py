@@ -11,7 +11,7 @@ class FileSystemWriter:
 		parsedUrl = urlparse(url)
 
 		fileName = self.writerHead + parsedUrl.netloc + self.cleanWithDashes(parsedUrl.path + parsedUrl.query)
-		fileToWrite = open(self.writerHead + parsedUrl.netloc + cleanWithDashes(parsedUrl.path + parsedUrl.query), "w")
+		fileToWrite = open(fileName, "w")
 		
 		logging.info("Writing to : " + fileName)
 		fileToWrite.write(data)
@@ -19,6 +19,6 @@ class FileSystemWriter:
 		logging.info("Finished writing to : " + fileName)
 		fileToWrite.close()
 
-	def cleanWithDashes(self, str):
-		re.sub("[=&/]", "--", str)
+	def cleanWithDashes(self, string):
+		return re.sub("[=&/]", "--", string)
 
