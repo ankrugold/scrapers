@@ -24,8 +24,8 @@ class Seeder:
 			self.crawler.queue.put(self.seedOnePage(initialSelects))
 	#Infinitely recursive. But should stop/wait once the queue finishes. Same holds for Crawler's keepFetching method.
 	def seed(self):
-		self.crawler.queue.put(self.seedOnePage(self.siteConfig.get("seeder.final_selects")))
-		self.seed()
+		while True:
+			self.crawler.queue.put(self.seedOnePage(self.siteConfig.get("seeder.final_selects")))
 	def seedOnePage(self, selects):
 		page = self.crawler.fetchAndWrite()
 		seeds = []

@@ -26,6 +26,6 @@ class Crawler:
 		self.write(fetched)
 		return fetched
 	def keepFetching(self): # YES! The crawl-till-you-get-blocked. Somebody stop me!!!
-		self.fetchAndWrite()
-		self.keepFetching()
+		while True:
+			self.fetchAndWrite()
 
